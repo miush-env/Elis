@@ -6,9 +6,9 @@ Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista d
 
 ## 1. 🎨 Estilos Globales y Layout Base
 
-- [ ] **Fondo AMOLED puro**: Configurar el contenedor principal con fondo negro absoluto (`bg-black` / `#000000`) y texto blanco.
-- [ ] **Tipografía**: Asegurar la fuente sans-serif geométrica moderna (Plus Jakarta Sans o Inter) para números grandes y títulos.
-- [ ] **Safe Area & Scrolling**: Contenedor principal con scroll vertical (`overflow-y-auto pb-24`) para que las tarjetas no queden tapadas por la barra inferior.
+- [ X ] **Fondo AMOLED puro**: Configurar el contenedor principal con fondo negro absoluto (`bg-black` / `#000000`) y texto blanco.
+- [ X ] **Tipografía**: Asegurar la fuente sans-serif geométrica moderna (Plus Jakarta Sans o Inter) para números grandes y títulos.
+- [  ] **Safe Area & Scrolling**: Contenedor principal con scroll vertical (`overflow-y-auto pb-24`) para que las tarjetas no queden tapadas por la barra inferior.
 
 ---
 

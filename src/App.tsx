@@ -123,8 +123,8 @@ function App() {
   // };
 
   return (
-    <main className="w-full h-screen bg-black">
-        <NextAlarm />
+    <main className="w-full h-screen">
+      <NextAlarm />
       {/* <ListAlarm alarms={alarms} /> */}
       {/* <CreateAlarm onAlarmCreated={refreshAlarms} /> */}
     </main>
