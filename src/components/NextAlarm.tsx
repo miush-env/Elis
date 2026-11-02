@@ -4,7 +4,7 @@ function NextAlarm() {
   // Todo : Aqui se hara una peticion de tipo GET para obtener la alarma mas cercana
   const nextAlarmHour = "07:30";
   return (
-    <header>
+    <header className="text-white">
       <h1>Alarma programada a las {nextAlarmHour}</h1>
     </header>
   );
