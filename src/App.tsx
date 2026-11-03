@@ -7,10 +7,13 @@ import ListAlarm from "@components/ListAlarm";
 import CreateAlarm from "@components/CreateAlarm";
 import { getAlarms } from "@/services/storage/alarmStorage";
 import type { Alarm } from "@/types/alarm";
+import { Button } from "@components/ui/button";
+import { Plus, EllipsisVertical } from "lucide-react";
 
 function App() {
   // const [alarmTime] = useState<string>("07:30");
   const [alarms, setAlarms] = useState<Alarm[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   const refreshAlarms = async () => {
     const data = await getAlarms();
@@ -83,7 +86,7 @@ function App() {
   //   return date;
   // };
 
-  // // Programar la alarma a la hora seleccionada con los botones Apagar y Aplazar
+  // Programar la alarma a la hora seleccionada con los botones Apagar y Aplazar
   // const scheduleAlarm = async () => {
   //   const targetDate = getAlarmDate(alarmTime);
 
@@ -104,29 +107,28 @@ function App() {
   //   );
   // };
 
-  // // Prueba inmediata en 5 segundos con los botones Apagar y Aplazar
-  // const testAlarmIn5Seconds = async () => {
-  //   await LocalNotifications.schedule({
-  //     notifications: [
-  //       {
-  //         id: 2,
-  //         title: "¡Prueba de Alarma!",
-  //         body: "Elige Apagar o Aplazar para detener la música:",
-  //         schedule: { at: new Date(Date.now() + 5000) },
-  //         actionTypeId: "ALARM_ACTIONS",
-  //       },
-  //     ],
-  //   });
-  //   alert(
-  //     "Notificación programada para dentro de 5 segundos. Espera a que llegue...",
-  //   );
-  // };
-
   return (
     <main className="w-full h-screen flex flex-col gap-10">
-      <NextAlarm />
+      <header className="flex justify-between items-center h-16 mt-5 px-4">
+        <NextAlarm />
+
+        <div className="flex gap-2 h-full">
+          <Button size={"lg"} onClick={() => setIsOpen(!isOpen)}>
+            <Plus />
+          </Button>
+          <Button size={"lg"}>
+            <EllipsisVertical />
+          </Button>
+        </div>
+      </header>
+
       <ListAlarm alarms={alarms} />
-      {/* <CreateAlarm onAlarmCreated={refreshAlarms} /> */}
+
+      <CreateAlarm
+        onAlarmCreated={refreshAlarms}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
     </main>
   );
 }
