@@ -2,7 +2,25 @@ import { Input } from "@/components/ui/input";
 import { scheduleAlarmNotification } from "@/services/notifications/alarmNotification";
 import { createAlarm } from "@/services/storage/alarmStorage";
 
-function CreateAlarm({ onAlarmCreated }: { onAlarmCreated: () => void }) {
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@components/ui/button";
+
+function CreateAlarm({
+  onAlarmCreated,
+  isOpen,
+  setIsOpen,
+}: {
+  onAlarmCreated: () => void;
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+}) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -24,7 +42,7 @@ function CreateAlarm({ onAlarmCreated }: { onAlarmCreated: () => void }) {
       },
       days: ["L", "X", "S"], // Inicialmente vacío, se puede actualizar más tarde
       isEnable: true,
-    }
+    };
 
     await createAlarm(newAlarm);
     await scheduleAlarmNotification(newAlarm);
@@ -33,16 +51,41 @@ function CreateAlarm({ onAlarmCreated }: { onAlarmCreated: () => void }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Input type="time" name="timeAlarm" id="timeAlarm" />
-      <Input type="text" name="alarmName" id="alarmName" />
-      <button
-        type="submit"
-        className="px-4 py-2 bg-primary text-white rounded-md"
-      >
-        Guardar
-      </button>
-    </form>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent>
+        <form onSubmit={handleSubmit}>
+          <DialogHeader>
+            <DialogTitle>Nueva Alarma</DialogTitle>
+            <DialogDescription>
+              configura la hora de tu alarma
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col gap-4 mt-4">
+            <Input type="time" name="timeAlarm" id="timeAlarm" required />
+            <Input
+              type="text"
+              name="alarmName"
+              id="alarmName"
+              required
+              placeholder="Nombre de la alarma"
+            />
+          </div>
+          <DialogFooter className="flex flex-col gap-2">
+            <Button type="submit" size={"lg"} onClick={() => setIsOpen(false)}>
+              Guardar
+            </Button>
+
+            <Button
+              size={"lg"}
+              variant={"destructive"}
+              onClick={() => setIsOpen(false)}
+            >
+              Cancelar
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 }
 
