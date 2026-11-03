@@ -123,9 +123,9 @@ function App() {
   // };
 
   return (
-    <main className="w-full h-screen">
+    <main className="w-full h-screen flex flex-col gap-10">
       <NextAlarm />
-      {/* <ListAlarm alarms={alarms} /> */}
+      <ListAlarm alarms={alarms} />
       {/* <CreateAlarm onAlarmCreated={refreshAlarms} /> */}
     </main>
   );
