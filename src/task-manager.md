@@ -14,10 +14,10 @@ Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista d
 
 ## 2. 🔝 Cabecera Superior (Header / NextAlarm)
 
-- [ ] **Título dinámico principal**: Texto grande y en negrita: `Alarma programada a las [HH:MM]` (obtenido de la alarma activa más próxima).
+- [ X ] **Título dinámico principal**: Texto grande y en negrita: `Alarma programada a las [HH:MM]` (obtenido de la alarma activa más próxima).
 
-- [ ] **Subtítulo temporal**: Fecha y hora de la próxima alarma o contexto actual (ej: `mar, 3 nov 06:20`) en color gris tenue (`text-zinc-400 text-sm`).
-- [ ] **Botones de acción (Esquina superior derecha)**:
+- [ X ] **Subtítulo temporal**: Fecha y hora de la próxima alarma o contexto actual (ej: `mar, 3 nov 06:20`) en color gris tenue (`text-zinc-400 text-sm`).
+- [ X ] **Botones de acción (Esquina superior derecha)**:
   - [ ] Botón con icono `+` (`Plus` de Lucide) que abra el modal/drawer para crear una nueva alarma.
   - [ ] Botón con icono `⋮` (`MoreVertical` de Lucide) para menú de opciones/ajustes.
 
