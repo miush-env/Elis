@@ -18,27 +18,27 @@ Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista d
 
 - [ X ] **Subtítulo temporal**: Fecha y hora de la próxima alarma o contexto actual (ej: `mar, 3 nov 06:20`) en color gris tenue (`text-zinc-400 text-sm`).
 - [ X ] **Botones de acción (Esquina superior derecha)**:
-  - [ ] Botón con icono `+` (`Plus` de Lucide) que abra el modal/drawer para crear una nueva alarma.
+  - [ - ] Botón con icono `+` (`Plus` de Lucide) que abra el modal/drawer para crear una nueva alarma.
   - [ ] Botón con icono `⋮` (`MoreVertical` de Lucide) para menú de opciones/ajustes.
 
 ---
 
 ## 3. 📋 Lista de Alarmas en Tarjetas Píldora (ListAlarm)
 
-- [ ] **Reemplazar estructura de `<Table>`**: Migrar de una tabla HTML clásica a una lista de tarjetas en píldora (`rounded-3xl` o `rounded-full`).
+- [ X ] **Reemplazar estructura de `<Table>`**: Migrar de una tabla HTML clásica a una lista de tarjetas en píldora (`rounded-3xl` o `rounded-full`).
 
-- [ ] **Diseño de cada tarjeta de alarma**:
-  - [ ] Fondo gris oscuro sutil (`bg-[#18181b]` o `bg-[#1c1c1e]`), con esquinas muy redondeadas (`rounded-3xl`) y padding interno espacioso (`p-5` o `px-6 py-4`).
-  - [ ] Separación entre tarjetas con `space-y-3` o `gap-3`.
-- [ ] **Sección Izquierda - Hora**:
-  - [ ] Tipografía de hora en tamaño grande (`text-3xl` o `text-4xl`), fuente tabular o monoespaciada para evitar saltos.
-- [ ] **Sección Central - Selector visual de Días (`L M X J V S D`)**:
-  - [ ] Mostrar las 7 iniciales: `L`, `M`, `X`, `J`, `V`, `S`, `D`.
+- [ X ] **Diseño de cada tarjeta de alarma**:
+  - [ X ] Fondo gris oscuro sutil (`bg-[#18181b]` o `bg-[#1c1c1e]`), con esquinas muy redondeadas (`rounded-3xl`) y padding interno espacioso (`p-5` o `px-6 py-4`).
+  - [ X ] Separación entre tarjetas con `space-y-3` o `gap-3`.
+- [ X ] **Sección Izquierda - Hora**:
+  - [ X ] Tipografía de hora en tamaño grande (`text-3xl` o `text-4xl`), fuente tabular o monoespaciada para evitar saltos.
+- [ - ] **Sección Central - Selector visual de Días (`L M X J V S D`)**:
+  - [ - ] Mostrar las 7 iniciales: `L`, `M`, `X`, `J`, `V`, `S`, `D`.
   - [ ] **Días inactivos**: Color gris oscuro apagado (`text-zinc-600`).
-  - [ ] **Días activos**: Color blanco (`text-white`) con un punto circular blanco (`w-1 h-1 bg-white rounded-full`) centrado justo encima de la letra.
-- [ ] **Sección Derecha - Toggle de Encendido / Apagado**:
-  - [ ] Switch o botón circular minimalista (anillo blanco cuando está activa, apagado/atenuado cuando está inactiva).
-  - [ ] Conectar el evento `toggleAlarm(id)` para alternar `isEnable` en la base de datos local y cancelar/reprogramar la notificación nativa.
+  - [ X ] **Días activos**: Color blanco (`text-white`) con un punto circular blanco (`w-1 h-1 bg-white rounded-full`) centrado justo encima de la letra.
+- [ X ] **Sección Derecha - Toggle de Encendido / Apagado**:
+  - [ X ] Switch o botón circular minimalista (anillo blanco cuando está activa, apagado/atenuado cuando está inactiva).
+  - [ X ] Conectar el evento `toggleAlarm(id)` para alternar `isEnable` en la base de datos local y cancelar/reprogramar la notificación nativa.
 
 ---
 
