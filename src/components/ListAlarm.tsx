@@ -1,44 +1,55 @@
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Button } from "@components/ui/button";
-import { startMusic, stopMusic } from "@/services/sound/playerSound";
+// import { Button } from "@components/ui/button";
+// import { startMusic, stopMusic } from "@/services/sound/playerSound";
 import type { Alarm } from "@/types/alarm";
+import { Switch } from "@/components/ui/switch";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 function ListAlarm({ alarms }: { alarms: Alarm[] }) {
   return (
-    <Table className="table-fixed">
-      <TableCaption>A list of your recent invoices.</TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-25">Nombre</TableHead>
-          <TableHead>Dias</TableHead>
-          <TableHead>Hora</TableHead>
-          <TableHead className="text-right">Acciones</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {alarms.map((alarm) => (
-          <TableRow key={alarm.id}>
-            <TableCell className="font-medium">{alarm.name}</TableCell>
-            <TableCell>{alarm.days.join(", ")}</TableCell>
-            <TableCell>{alarm.time.hour + " " + alarm.time.minute}</TableCell>
-            <TableCell
-              className="text-right"
-              onClick={alarm.isEnable === true ? startMusic : stopMusic}
-            >
-              <Button>{alarm.isEnable === true ? "Apagar" : "Sonar"}</Button>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <>
+      {alarms.length === 0 ? (
+        <p className="text-center text-gray-500">No hay alarmas programadas.</p>
+      ) : (
+        <ScrollArea className="h-[83vh] w-full px-4">
+          <ul className="space-y-4">
+            Your scrollable content here.
+            {alarms.map((alarm) => (
+              <li
+                key={alarm.id}
+                className="alarm-card bg-[#18181A] hover:bg-[#1E1E22] rounded-[24px] px-6 py-4 flex items-center justify-between transition-all cursor-pointer active:scale-[0.99] text-white"
+              >
+                <div className="flex flex-col">
+                  <span className="text-[40px] font-light tracking-tight leading-none font-display text-white">
+                    {alarm.time.hour < 10
+                      ? `0${alarm.time.hour}`
+                      : alarm.time.hour}
+                    :
+                    {alarm.time.minute < 10
+                      ? `0${alarm.time.minute}`
+                      : alarm.time.minute}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-white">
+                  <span className="relative flex flex-col items-center">
+                    <span className="w-1 h-1 rounded-full mb-0.5 active-dot bg-white"></span>
+                    <div className="flex items-center gap-2--">
+                      {alarm.days.map((day, index) => (
+                        <span key={index} className="text-[10px]">
+                          {day}
+                        </span>
+                      ))}
+                    </div>
+                  </span>
+                </div>
+                {/* colorActive="bg-green-500" colorDisabled="bg-blue-500" */}
+                <Switch className="data-checked:bg-green-600 data-unchecked:bg-red-700" />
+              </li>
+            ))}
+          </ul>
+          <ScrollBar  />
+        </ScrollArea>
+      )}
+    </>
   );
 }
 
