@@ -8,7 +8,7 @@ Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista d
 
 - [ X ] **Fondo AMOLED puro**: Configurar el contenedor principal con fondo negro absoluto (`bg-black` / `#000000`) y texto blanco.
 - [ X ] **Tipografía**: Asegurar la fuente sans-serif geométrica moderna (Plus Jakarta Sans o Inter) para números grandes y títulos.
-- [  ] **Safe Area & Scrolling**: Contenedor principal con scroll vertical (`overflow-y-auto pb-24`) para que las tarjetas no queden tapadas por la barra inferior.
+- [ X ] **Safe Area & Scrolling**: Contenedor principal con scroll vertical (`overflow-y-auto pb-24`) para que las tarjetas no queden tapadas por la barra inferior.
 
 ---
 
@@ -18,7 +18,7 @@ Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista d
 
 - [ X ] **Subtítulo temporal**: Fecha y hora de la próxima alarma o contexto actual (ej: `mar, 3 nov 06:20`) en color gris tenue (`text-zinc-400 text-sm`).
 - [ X ] **Botones de acción (Esquina superior derecha)**:
-  - [ - ] Botón con icono `+` (`Plus` de Lucide) que abra el modal/drawer para crear una nueva alarma.
+  - [ X ] Botón con icono `+` (`Plus` de Lucide) que abra el modal/drawer para crear una nueva alarma.
   - [ ] Botón con icono `⋮` (`MoreVertical` de Lucide) para menú de opciones/ajustes.
 
 ---
@@ -32,8 +32,8 @@ Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista d
   - [ X ] Separación entre tarjetas con `space-y-3` o `gap-3`.
 - [ X ] **Sección Izquierda - Hora**:
   - [ X ] Tipografía de hora en tamaño grande (`text-3xl` o `text-4xl`), fuente tabular o monoespaciada para evitar saltos.
-- [ - ] **Sección Central - Selector visual de Días (`L M X J V S D`)**:
-  - [ - ] Mostrar las 7 iniciales: `L`, `M`, `X`, `J`, `V`, `S`, `D`.
+- [ X ] **Sección Central - Selector visual de Días (`L M X J V S D`)**:
+  - [ X ] Mostrar las 7 iniciales: `L`, `M`, `X`, `J`, `V`, `S`, `D`.
   - [ ] **Días inactivos**: Color gris oscuro apagado (`text-zinc-600`).
   - [ X ] **Días activos**: Color blanco (`text-white`) con un punto circular blanco (`w-1 h-1 bg-white rounded-full`) centrado justo encima de la letra.
 - [ X ] **Sección Derecha - Toggle de Encendido / Apagado**:
