@@ -19,3 +19,12 @@ export const getAlarms = async (): Promise<Alarm[]> => {
   const { value } = await Preferences.get({ key: STORAGE_KEY });
   return value ? JSON.parse(value) : [];
 }
+
+export const deleteAlarm = async (alarmId: number) => {
+  const getAlarm = await getAlarms()
+  const updateAlarm = getAlarm.filter((alarm)=>{alarm.id !== alarmId})
+  await Preferences.set({
+    key: STORAGE_KEY,
+    value: JSON.stringify(updateAlarm),
+  });
+}
