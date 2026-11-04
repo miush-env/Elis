@@ -1,5 +1,3 @@
-// import { Button } from "@components/ui/button";
-// import { startMusic, stopMusic } from "@/services/sound/playerSound";
 import type { Alarm } from "@/types/alarm";
 import { Switch } from "@/components/ui/switch";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -31,8 +29,8 @@ function ListAlarm({ alarms }: { alarms: Alarm[] }) {
                 </div>
                 <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-white">
                   <span className="relative flex flex-col items-center">
-                    <span className="w-1 h-1 rounded-full mb-0.5 active-dot bg-white"></span>
-                    <div className="flex items-center gap-2--">
+                    {/* <span className="w-1 h-1 rounded-full mb-0.5 active-dot bg-white"></span> */}
+                    <div className="flex items-center gap-1">
                       {alarm.days.map((day, index) => (
                         <span key={index} className="text-[10px]">
                           {day}
@@ -41,7 +39,6 @@ function ListAlarm({ alarms }: { alarms: Alarm[] }) {
                     </div>
                   </span>
                 </div>
-                {/* colorActive="bg-green-500" colorDisabled="bg-blue-500" */}
                 <Switch className="data-checked:bg-green-600 data-unchecked:bg-red-700" />
               </li>
             ))}
