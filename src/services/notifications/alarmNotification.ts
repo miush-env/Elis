@@ -56,3 +56,7 @@ export const scheduleAlarmNotification = async (alarm: Alarm) => {
     ],
   });
 };
+
+export const cancelAlarmNotification = async (alarmId: number) => {
+  // Todo : CREAR LOGICA ENCARGADA DE ELIMIANR LAS ALARMAS
+}
