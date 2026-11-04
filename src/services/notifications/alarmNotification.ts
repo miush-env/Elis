@@ -1,6 +1,7 @@
 import { BackgroundMode } from "@anuradev/capacitor-background-mode";
 import { LocalNotifications } from "@capacitor/local-notifications";
 import type {Alarm} from "@/types/alarm";
+import { deleteAlarm } from "@/services/storage/alarmStorage";
 
 export const setupNotifications = async () => {
   try {
@@ -36,21 +37,20 @@ export const setupNotifications = async () => {
 
 
 export const scheduleAlarmNotification = async (alarm: Alarm) => {
-  // 1. Calcular la próxima fecha a partir de la hora elegida
   const targetDate = new Date();
   targetDate.setHours(alarm.time.hour, alarm.time.minute, 0, 0);
-  // Si la hora ya pasó hoy (ej: son las 15:00 y pusiste 07:30), se agenda para mañana
+  
   if (targetDate.getTime() <= Date.now()) {
     targetDate.setDate(targetDate.getDate() + 1);
   }
-  // 2. Pasársela al sistema operativo
+
   await LocalNotifications.schedule({
     notifications: [
       {
-        id: alarm.id, // Usás el mismo ID numérico de tu alarma
+        id: alarm.id,
         title: alarm.name || '¡Alarma Sonando!',
         body: 'Elige una acción para apagarla:',
-        schedule: { at: targetDate }, // 👈 Android se encarga de esperar esta fecha
+        schedule: { at: targetDate },
         actionTypeId: 'ALARM_ACTIONS', // Los botones de Apagar y Aplazar
       },
     ],
@@ -58,5 +58,7 @@ export const scheduleAlarmNotification = async (alarm: Alarm) => {
 };
 
 export const cancelAlarmNotification = async (alarmId: number) => {
-  // Todo : CREAR LOGICA ENCARGADA DE ELIMIANR LAS ALARMAS
+  await LocalNotifications.cancel({
+    notifications: [{ id: alarmId }],
+  })
 }
