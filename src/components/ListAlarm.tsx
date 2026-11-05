@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { deleteAlarm } from "@/services/storage/alarmStorage";
 import { cancelAlarmNotification } from "@/services/notifications/alarmNotification";
+import { useState } from "react";
 
 function ListAlarm({
   alarms,
@@ -17,11 +18,18 @@ function ListAlarm({
   alarms: Alarm[];
   onAlarmDeleted: () => void;
 }) {
+  // Guardamos el id de la alarma cuyo popover está abierto (o null si ninguno)
+  const [openAlarmId, setOpenAlarmId] = useState<number | null>(null);
+
   const handleDeleteAlarm = async (id: number) => {
+    // 1. Cerramos el popover de inmediato para evitar que quede flotando en (0,0)
+    setOpenAlarmId(null);
+
+    // 2. Borramos del almacenamiento y cancelamos en Android
     await deleteAlarm(id);
-    // 2. Cancela el aviso en el reloj de Android
     await cancelAlarmNotification(id);
 
+    // 3. Avisamos al padre para que refresque la lista
     onAlarmDeleted();
   };
 
@@ -33,8 +41,13 @@ function ListAlarm({
         <ScrollArea className="h-[83vh] w-full px-4">
           <ul className="space-y-4">
             {alarms.map((alarm) => (
-              <Popover>
-                <li key={alarm.id}>
+              <li key={alarm.id}>
+                <Popover
+                  open={openAlarmId === alarm.id}
+                  onOpenChange={(isOpen) =>
+                    setOpenAlarmId(isOpen ? alarm.id : null)
+                  }
+                >
                   <PopoverTrigger className="w-full alarm-card bg-[#18181A] hover:bg-[#1E1E22] rounded-[24px] px-6 py-4 flex items-center justify-between transition-all cursor-pointer active:scale-[0.99] text-white text-left">
                     <div className="flex flex-col">
                       <span className="text-[40px] font-light tracking-tight leading-none font-display text-white">
@@ -76,10 +89,15 @@ function ListAlarm({
                     >
                       Eliminar
                     </Button>
-                    <Button size="lg">Cancelar</Button>
+                    <Button
+                      size="lg"
+                      onClick={() => setOpenAlarmId(null)}
+                    >
+                      Cancelar
+                    </Button>
                   </PopoverContent>
-                </li>
-              </Popover>
+                </Popover>
+              </li>
             ))}
           </ul>
           <ScrollBar />
