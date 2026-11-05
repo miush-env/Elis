@@ -6,12 +6,30 @@ export const setupNotifications = async () => {
   try {
     await BackgroundMode.requestNotificationsPermission();
 
+    // Solicitar exclusión de optimización de batería (Doze mode)
+    try {
+      await BackgroundMode.requestDisableBatteryOptimizations();
+    } catch (e) {
+      console.warn("Optimización de batería no disponible o rechazada:", e);
+    }
+
     const status = await LocalNotifications.checkPermissions();
     if (status.display !== "granted") {
       await LocalNotifications.requestPermissions();
     }
 
-    // Registrar los botones de la notificación
+    // 1. Crear canal de máxima prioridad para despertar la pantalla
+    await LocalNotifications.createChannel({
+      id: "alarm_channel",
+      name: "Alarmas Aura",
+      description: "Canal de alta prioridad para despertar el dispositivo con alarmas",
+      importance: 5, // 5 = IMPORTANCE_HIGH (enciende la pantalla y muestra alerta)
+      visibility: 1, // 1 = VISIBILITY_PUBLIC (visible en pantalla de bloqueo)
+      sound: "musica.mp3",
+      vibration: true,
+    });
+
+    // 2. Registrar los botones de la notificación
     await LocalNotifications.registerActionTypes({
       types: [
         {
@@ -50,6 +68,8 @@ export const scheduleAlarmNotification = async (alarm: Alarm) => {
         body: "Elige una acción para apagarla:",
         schedule: { at: targetDate },
         actionTypeId: "ALARM_ACTIONS", // Los botones de Apagar y Aplazar
+        channelId: "alarm_channel", // 👈 Canal de alta prioridad para encender la pantalla
+        sound: "musica.mp3",
       },
     ],
   });
