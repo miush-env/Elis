@@ -1,7 +1,6 @@
 import { BackgroundMode } from "@anuradev/capacitor-background-mode";
 import { LocalNotifications } from "@capacitor/local-notifications";
-import type {Alarm} from "@/types/alarm";
-import { deleteAlarm } from "@/services/storage/alarmStorage";
+import type { Alarm } from "@/types/alarm";
 
 export const setupNotifications = async () => {
   try {
@@ -35,11 +34,10 @@ export const setupNotifications = async () => {
   }
 };
 
-
 export const scheduleAlarmNotification = async (alarm: Alarm) => {
   const targetDate = new Date();
   targetDate.setHours(alarm.time.hour, alarm.time.minute, 0, 0);
-  
+
   if (targetDate.getTime() <= Date.now()) {
     targetDate.setDate(targetDate.getDate() + 1);
   }
@@ -48,10 +46,10 @@ export const scheduleAlarmNotification = async (alarm: Alarm) => {
     notifications: [
       {
         id: alarm.id,
-        title: alarm.name || '¡Alarma Sonando!',
-        body: 'Elige una acción para apagarla:',
+        title: alarm.name || "¡Alarma Sonando!",
+        body: "Elige una acción para apagarla:",
         schedule: { at: targetDate },
-        actionTypeId: 'ALARM_ACTIONS', // Los botones de Apagar y Aplazar
+        actionTypeId: "ALARM_ACTIONS", // Los botones de Apagar y Aplazar
       },
     ],
   });
@@ -60,5 +58,5 @@ export const scheduleAlarmNotification = async (alarm: Alarm) => {
 export const cancelAlarmNotification = async (alarmId: number) => {
   await LocalNotifications.cancel({
     notifications: [{ id: alarmId }],
-  })
-}
+  });
+};
