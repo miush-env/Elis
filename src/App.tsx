@@ -73,40 +73,6 @@ function App() {
     };
   }, []);
 
-  // Calcular la próxima fecha a partir del string HH:mm
-  // const getAlarmDate = (timeStr: string): Date => {
-  //   const [hours, minutes] = timeStr.split(":").mwap(Number);
-  //   const date = new Date();
-  //   date.setHours(hours, minutes, 0, 0);
-
-  // Si la hora ya pasó hoy, se agenda para mañana
-  //   if (date.getTime() <= Date.now()) {
-  //     date.setDate(date.getDate() + 1);
-  //   }
-  //   return date;
-  // };
-
-  // Programar la alarma a la hora seleccionada con los botones Apagar y Aplazar
-  // const scheduleAlarm = async () => {
-  //   const targetDate = getAlarmDate(alarmTime);
-
-  //   await LocalNotifications.schedule({
-  //     notifications: [
-  //       {
-  //         id: 1,
-  //         title: "¡Alarma Sonando!",
-  //         body: "Elige una acción para apagarla:",
-  //         schedule: { at: targetDate },
-  //         actionTypeId: "ALARM_ACTIONS",
-  //       },
-  //     ],
-  //   });
-
-  //   alert(
-  //     `Alarma configurada para las ${alarmTime} (${targetDate.toLocaleDateString()})`,
-  //   );
-  // };
-
   return (
     <main className="w-full h-screen flex flex-col gap-10">
       <header className="flex justify-between items-center h-16 mt-5 px-4">
@@ -122,7 +88,7 @@ function App() {
         </div>
       </header>
 
-      <ListAlarm alarms={alarms} />
+      <ListAlarm alarms={alarms} onAlarmDeleted={refreshAlarms} />
 
       <CreateAlarm
         onAlarmCreated={refreshAlarms}
