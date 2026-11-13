@@ -34,7 +34,7 @@ Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista d
   - [ X ] Tipografía de hora en tamaño grande (`text-3xl` o `text-4xl`), fuente tabular o monoespaciada para evitar saltos.
 - [ X ] **Sección Central - Selector visual de Días (`L M X J V S D`)**:
   - [ X ] Mostrar las 7 iniciales: `L`, `M`, `X`, `J`, `V`, `S`, `D`.
-  - [ ] **Días inactivos**: Color gris oscuro apagado (`text-zinc-600`).
+  - [ X ] **Días inactivos**: Color gris oscuro apagado (`text-zinc-600`).
   - [ X ] **Días activos**: Color blanco (`text-white`) con un punto circular blanco (`w-1 h-1 bg-white rounded-full`) centrado justo encima de la letra.
 - [ X ] **Sección Derecha - Toggle de Encendido / Apagado**:
   - [ X ] Switch o botón circular minimalista (anillo blanco cuando está activa, apagado/atenuado cuando está inactiva).
