@@ -8,7 +8,11 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { deleteAlarm } from "@/services/storage/alarmStorage";
-import { cancelAlarmNotification } from "@/services/notifications/alarmNotification";
+import {
+  cancelAlarmNotification,
+  scheduleAlarmNotification,
+} from "@/services/notifications/alarmNotification";
+import { toggleAlarmStatus } from "@/services/storage/alarmStorage";
 import { useState } from "react";
 
 function ListAlarm({
@@ -30,6 +34,20 @@ function ListAlarm({
     await cancelAlarmNotification(id);
 
     // 3. Avisamos al padre para que refresque la lista
+    onAlarmDeleted();
+  };
+
+  const handleToggleAlarm = async (id: number) => {
+    const updateAlarm = await toggleAlarmStatus(id);
+
+    if (updateAlarm) {
+      if (updateAlarm.isEnable) {
+        await scheduleAlarmNotification(updateAlarm);
+      } else {
+        await cancelAlarmNotification(id);
+      }
+    }
+
     onAlarmDeleted();
   };
 
@@ -73,7 +91,11 @@ function ListAlarm({
                       </span>
                     </div>
                     <div onClick={(e) => e.stopPropagation()}>
-                      <Switch className="data-checked:bg-green-600 data-unchecked:bg-red-700" />
+                      <Switch
+                        checked={alarm.isEnable}
+                        onCheckedChange={() => handleToggleAlarm(alarm.id)}
+                        className="data-checked:bg-green-600 data-unchecked:bg-red-700"
+                      />
                     </div>
                   </PopoverTrigger>
 
@@ -89,10 +111,7 @@ function ListAlarm({
                     >
                       Eliminar
                     </Button>
-                    <Button
-                      size="lg"
-                      onClick={() => setOpenAlarmId(null)}
-                    >
+                    <Button size="lg" onClick={() => setOpenAlarmId(null)}>
                       Cancelar
                     </Button>
                   </PopoverContent>
