@@ -21,6 +21,8 @@ function AlarmCard({
   alarm: Alarm;
   onAlarmDeleted: () => void;
 }) {
+  const WEEK_DAYS = ["L", "M", "X", "J", "V", "S", "D"];
+  // const [alarmDayActive, setAlarmDayActive] = useState([])
   // Guardamos el id de la alarma cuyo popover está abierto (o null si ninguno)
   const [openAlarmId, setOpenAlarmId] = useState<number | null>(null);
 
@@ -50,6 +52,25 @@ function AlarmCard({
     onAlarmDeleted();
   };
 
+  const alarmDayActive = WEEK_DAYS.map((d) => {
+    const isActive = alarm.days.includes(d);
+
+    if (isActive) {
+      return (
+        <div className="relative flex flex-col items-center" key={d}>
+          <span className="w-1 h-1 rounded-full absolute -top-2 active-dot bg-white"></span>
+          <span className="text-white">{d}</span>
+        </div>
+      );
+    } else {  
+      return (
+        <span key={d} className="text-gray-500">
+          {d}
+        </span>
+      );
+    }
+  });
+
   return (
     <li key={alarm.id}>
       <Popover
@@ -67,14 +88,7 @@ function AlarmCard({
           </div>
           <div className="flex items-center gap-2 text-xs font-semibold tracking-wider text-white">
             <span className="relative flex flex-col items-center">
-              {/* <span className="w-1 h-1 rounded-full mb-0.5 active-dot bg-white"></span> */}
-              <div className="flex items-center gap-1">
-                {alarm.days.map((day, index) => (
-                  <span key={index} className="text-[10px]">
-                    {day}
-                  </span>
-                ))}
-              </div>
+              <div className="flex items-center gap-1">{alarmDayActive}</div>
             </span>
           </div>
           <div onClick={(e) => e.stopPropagation()}>
