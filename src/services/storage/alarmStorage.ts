@@ -28,3 +28,19 @@ export const deleteAlarm = async (alarmId: number) => {
     value: JSON.stringify(updateAlarm),
   });
 }
+
+export const toggleAlarmStatus = async (alarmId: number) => {
+  const getAlarm = await getAlarms()
+  const updateAlarm = getAlarm.map((alarm) => {
+    if (alarm.id === alarmId) {
+      return { ...alarm, isEnable: !alarm.isEnable };
+    }
+    return alarm;
+  });
+  await Preferences.set({
+    key: STORAGE_KEY,
+    value: JSON.stringify(updateAlarm),
+  });
+
+   return updateAlarm.find((alarm) => alarm.id === alarmId);
+}
