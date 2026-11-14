@@ -22,7 +22,8 @@ export const setupNotifications = async () => {
     await LocalNotifications.createChannel({
       id: "alarm_channel",
       name: "Alarmas Aura",
-      description: "Canal de alta prioridad para despertar el dispositivo con alarmas",
+      description:
+        "Canal de alta prioridad para despertar el dispositivo con alarmas",
       importance: 5, // 5 = IMPORTANCE_HIGH (enciende la pantalla y muestra alerta)
       visibility: 1, // 1 = VISIBILITY_PUBLIC (visible en pantalla de bloqueo)
       sound: "musica.mp3",
@@ -53,6 +54,18 @@ export const setupNotifications = async () => {
 };
 
 export const scheduleAlarmNotification = async (alarm: Alarm) => {
+  const DAY_TO_WEEKDAY: Record<string, number> = {
+    D: 1, // Domingo
+    L: 2, // Lunes
+    M: 3, // Martes
+    X: 4, // Miércoles
+    J: 5, // Jueves
+    V: 6, // Viernes
+    S: 7, // Sábado
+  };
+
+  const weekDay = alarm.days.map((day) => DAY_TO_WEEKDAY[day]);
+
   const targetDate = new Date();
   targetDate.setHours(alarm.time.hour, alarm.time.minute, 0, 0);
 
@@ -60,23 +73,54 @@ export const scheduleAlarmNotification = async (alarm: Alarm) => {
     targetDate.setDate(targetDate.getDate() + 1);
   }
 
-  await LocalNotifications.schedule({
-    notifications: [
+  let notificationsToSchedule = [];
+
+  if (alarm.days.length === 0) {
+    notificationsToSchedule = [
       {
         id: alarm.id,
         title: alarm.name || "¡Alarma Sonando!",
         body: "Elige una acción para apagarla:",
-        schedule: { at: targetDate },
-        actionTypeId: "ALARM_ACTIONS", // Los botones de Apagar y Aplazar
-        channelId: "alarm_channel", // 👈 Canal de alta prioridad para encender la pantalla
+        schedule: {
+          at: targetDate, // 👈 at va directo sin llaves { targetDate }
+          allowWhileIdle: true,
+        },
+        actionTypeId: "ALARM_ACTIONS",
+        channelId: "alarm_channel",
         sound: "musica.mp3",
       },
-    ],
+    ];
+  } else {
+    notificationsToSchedule = weekDay.map((dayNumber) => ({
+      id: alarm.id * 10 + dayNumber,
+      title: alarm.name || "¡Alarma Sonando!",
+      body: "Elige una acción para apagarla:",
+      schedule: {
+        on: {
+          weekday: dayNumber,
+          hour: alarm.time.hour,
+          minute: alarm.time.minute,
+        },
+        repeats: true, // 👈 ¡No te olvides de este para que repita!
+        allowWhileIdle: true, // 👈 Para que suene con la pantalla apagada
+      },
+      actionTypeId: "ALARM_ACTIONS",
+      channelId: "alarm_channel",
+      sound: "musica.mp3",
+    }));
+  }
+
+  await LocalNotifications.schedule({
+    notifications: notificationsToSchedule,
   });
 };
 
 export const cancelAlarmNotification = async (alarmId: number) => {
+  const idsToCancel = [
+    { id: alarmId },
+    ...[1, 2, 3, 4, 5, 6, 7].map((day) => ({ id: alarmId * 10 + day })),
+  ];
   await LocalNotifications.cancel({
-    notifications: [{ id: alarmId }],
+    notifications: idsToCancel,
   });
 };
