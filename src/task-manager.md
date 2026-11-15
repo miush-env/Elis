@@ -14,8 +14,8 @@ Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista d
 
 ## 2. 🔝 Cabecera Superior (Header / NextAlarm)
 
-- [ - ] **Título dinámico principal**: Conectar el texto grande: `Alarma programada a las [HH:MM]` obtenido en tiempo real de la alarma activa más próxima (o mensaje cuando no hay alarmas activas).
-- [ - ] **Subtítulo temporal dinámico**: Fecha y hora de la próxima alarma activa (ej: `mar, 3 nov 06:20`) calculada en base al día correspondiente.
+- [ X ] **Título dinámico principal**: Conectar el texto grande: `Alarma programada a las [HH:MM]` obtenido en tiempo real de la alarma activa más próxima (o mensaje cuando no hay alarmas activas).
+- [ X ] **Subtítulo temporal dinámico**: Fecha y hora de la próxima alarma activa (ej: `mar, 3 nov 06:20`) calculada en base al día correspondiente.
 - [ X ] **Botón de crear alarma**: Botón con icono `+` (`Plus` de Lucide) que abre el modal/drawer para crear una nueva alarma.
 - [ ] **Botón de menú de ajustes**: Conectar el botón con icono `⋮` (`EllipsisVertical` de Lucide) con menú/popover de opciones.
 
@@ -52,13 +52,13 @@ Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista d
 
 ## 5. ⚙️ Lógica de Próxima Alarma (NextAlarm Logic)
 
-- [ - ] Crear función auxiliar `getNextAlarm(alarms: Alarm[])`:
-  - [ - ] Filtrar solo las alarmas activas (`isEnable === true`).
-  - [ ] Si la alarma tiene días de la semana seleccionados, calcular la fecha/hora exacta del próximo día de disparo.
-  - [ ] Si no tiene días seleccionados, calcular para hoy o mañana según la hora actual.
-  - [ ] Ordenar por la fecha más cercana y retornar la próxima alarma.
-- [ ] Pasar `alarms` desde `App.tsx` a `NextAlarm` para alimentar el componente con datos reales.
-- [ ] Manejar estado vacío cuando no haya alarmas activadas (ej: *"Sin alarmas programadas"*).
+- [ X ] Crear función auxiliar `getNextAlarm(alarms: Alarm[])`:
+  - [ X ] Filtrar solo las alarmas activas (`isEnable === true`).
+  - [ X ] Si la alarma tiene días de la semana seleccionados, calcular la fecha/hora exacta del próximo día de disparo.
+  - [ X ] Si no tiene días seleccionados, calcular para hoy o mañana según la hora actual.
+  - [ X ] Ordenar por la fecha más cercana y retornar la próxima alarma.
+- [ X ] Pasar `alarms` desde `App.tsx` a `NextAlarm` para alimentar el componente con datos reales.
+- [ X ] Manejar estado vacío cuando no haya alarmas activadas (ej: *"Sin alarmas programadas"*).
 
 ---
 
@@ -69,7 +69,7 @@ Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista d
 - [ X ] **Repetición Semanal**: Diccionario de días (`D=1, L=2...`) y programación con `schedule.on.weekday` y `repeats: true`.
 - [ X ] **Fix de Desbordamiento de 32 bits**: Acotar el `baseId = alarm.id % 100000000` para evitar el error `IDENTIFIER_NOT_INT`.
 - [ X ] **Cancelación Masiva de IDs**: Cancelar tanto el ID base como los IDs de cada día de la semana (`baseId * 10 + day`).
-- [ ] **Verificación en Celular Real**: Confirmar que la alarma suene en la hora programada con pantalla bloqueada.
+- [ - ] **Verificación en Celular Real**: Confirmar que la alarma suene en la hora programada con pantalla bloqueada.
 
 ---
 
