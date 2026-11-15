@@ -76,7 +76,7 @@ function App() {
   return (
     <main className="w-full h-screen flex flex-col gap-10">
       <header className="flex justify-between items-center h-16 mt-5 px-4">
-        <NextAlarm />
+        <NextAlarm alarms={alarms} />
 
         <div className="flex gap-2 h-full">
           <Button size={"lg"} onClick={() => setIsOpen(!isOpen)}>
