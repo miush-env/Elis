@@ -91,8 +91,10 @@ export const scheduleAlarmNotification = async (alarm: Alarm) => {
       },
     ];
   } else {
+    const baseId = alarm.id % 100000000;
+    // const notificationId = baseId * 10 + dayNumber;
     notificationsToSchedule = weekDay.map((dayNumber) => ({
-      id: alarm.id * 10 + dayNumber,
+      id: baseId * 10 + dayNumber,
       title: alarm.name || "¡Alarma Sonando!",
       body: "Elige una acción para apagarla:",
       schedule: {
@@ -116,9 +118,12 @@ export const scheduleAlarmNotification = async (alarm: Alarm) => {
 };
 
 export const cancelAlarmNotification = async (alarmId: number) => {
+  const baseId = alarmId % 100000000;
+
   const idsToCancel = [
     { id: alarmId },
-    ...[1, 2, 3, 4, 5, 6, 7].map((day) => ({ id: alarmId * 10 + day })),
+    { id: baseId },
+    ...[1, 2, 3, 4, 5, 6, 7].map((day) => ({ id: baseId * 10 + day })),
   ];
   await LocalNotifications.cancel({
     notifications: idsToCancel,
