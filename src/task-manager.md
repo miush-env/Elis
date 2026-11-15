@@ -1,6 +1,6 @@
 # Task Manager - Pantalla Principal de Alarmas (Aura)
 
-Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista de la pantalla de alarmas de la imagen.
+Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista de la pantalla de alarmas de la imagen y asegurar el funcionamiento nativo en Android.
 
 ---
 
@@ -14,47 +14,66 @@ Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista d
 
 ## 2. 🔝 Cabecera Superior (Header / NextAlarm)
 
-- [ X ] **Título dinámico principal**: Texto grande y en negrita: `Alarma programada a las [HH:MM]` (obtenido de la alarma activa más próxima).
-
-- [ X ] **Subtítulo temporal**: Fecha y hora de la próxima alarma o contexto actual (ej: `mar, 3 nov 06:20`) en color gris tenue (`text-zinc-400 text-sm`).
-- [ X ] **Botones de acción (Esquina superior derecha)**:
-  - [ X ] Botón con icono `+` (`Plus` de Lucide) que abra el modal/drawer para crear una nueva alarma.
-  - [ ] Botón con icono `⋮` (`MoreVertical` de Lucide) para menú de opciones/ajustes.
+- [ ] **Título dinámico principal**: Conectar el texto grande: `Alarma programada a las [HH:MM]` obtenido en tiempo real de la alarma activa más próxima (o mensaje cuando no hay alarmas activas).
+- [ ] **Subtítulo temporal dinámico**: Fecha y hora de la próxima alarma activa (ej: `mar, 3 nov 06:20`) calculada en base al día correspondiente.
+- [ X ] **Botón de crear alarma**: Botón con icono `+` (`Plus` de Lucide) que abre el modal/drawer para crear una nueva alarma.
+- [ ] **Botón de menú de ajustes**: Conectar el botón con icono `⋮` (`EllipsisVertical` de Lucide) con menú/popover de opciones.
 
 ---
 
-## 3. 📋 Lista de Alarmas en Tarjetas Píldora (ListAlarm)
+## 3. 📋 Lista de Alarmas en Tarjetas Píldora (ListAlarm & AlarmCard)
 
-- [ X ] **Reemplazar estructura de `<Table>`**: Migrar de una tabla HTML clásica a una lista de tarjetas en píldora (`rounded-3xl` o `rounded-full`).
-
-- [ X ] **Diseño de cada tarjeta de alarma**:
-  - [ X ] Fondo gris oscuro sutil (`bg-[#18181b]` o `bg-[#1c1c1e]`), con esquinas muy redondeadas (`rounded-3xl`) y padding interno espacioso (`p-5` o `px-6 py-4`).
-  - [ X ] Separación entre tarjetas con `space-y-3` o `gap-3`.
-- [ X ] **Sección Izquierda - Hora**:
-  - [ X ] Tipografía de hora en tamaño grande (`text-3xl` o `text-4xl`), fuente tabular o monoespaciada para evitar saltos.
-- [ X ] **Sección Central - Selector visual de Días (`L M X J V S D`)**:
-  - [ X ] Mostrar las 7 iniciales: `L`, `M`, `X`, `J`, `V`, `S`, `D`.
-  - [ X ] **Días inactivos**: Color gris oscuro apagado (`text-zinc-600`).
-  - [ X ] **Días activos**: Color blanco (`text-white`) con un punto circular blanco (`w-1 h-1 bg-white rounded-full`) centrado justo encima de la letra.
-- [ X ] **Sección Derecha - Toggle de Encendido / Apagado**:
-  - [ X ] Switch o botón circular minimalista (anillo blanco cuando está activa, apagado/atenuado cuando está inactiva).
-  - [ X ] Conectar el evento `toggleAlarm(id)` para alternar `isEnable` en la base de datos local y cancelar/reprogramar la notificación nativa.
+- [ X ] **Modularización de Componentes**: Separar `AlarmCard` de `ListAlarm` para código limpio y mantenible.
+- [ X ] **Diseño de cada tarjeta de alarma**: Fondo gris oscuro sutil (`bg-[#18181A]`), esquinas redondeadas (`rounded-[24px]`) y padding generoso.
+- [ X ] **Sección Hora**: Tipografía grande (`text-[40px] font-light`) con formato de dos dígitos (`00:00`).
+- [ X ] **Sección Días (`L M X J V S D`)**:
+  - [ X ] Mostrar siempre las 7 iniciales fijas.
+  - [ X ] **Días inactivos**: Color gris apagado (`text-gray-500`).
+  - [ X ] **Días activos**: Color blanco (`text-white`) con punto indicador blanco (`active-dot bg-white`) centrado arriba de la letra.
+- [ X ] **Sección Toggle de Encendido / Apagado**:
+  - [ X ] Switch minimalista conectado a `alarm.isEnable`.
+  - [ X ] Sincronización con base de datos local (`toggleAlarmStatus`).
+  - [ X ] Programar/cancelar notificación al alternar el switch.
+- [ X ] **Eliminación de Alarma**: Popover contextual para borrar la alarma del storage y cancelar sus notificaciones.
 
 ---
 
 ## 4. 🧭 Barra de Navegación Inferior (Bottom Navigation Bar)
 
-- [ ] **Contenedor fijo**: Fijado en la parte inferior (`fixed bottom-0 left-0 w-full bg-black/95 backdrop-blur-md`).
-
+- [ ] **Contenedor fijo**: Fijado en la parte inferior (`fixed bottom-0 left-0 w-full bg-black/95 backdrop-blur-md border-t border-zinc-900`).
 - [ ] **Items de navegación**:
-  - [ ] **Alarma** (Pestaña activa): Texto en blanco, con una pequeña barra horizontal blanca indicadora debajo (`border-b-2 border-white` o píldora indicadora).
+  - [ ] **Alarma** (Pestaña activa): Texto blanco con barra horizontal/píldora blanca indicadora debajo.
   - [ ] **Reloj Mundial** (Inactivo): Texto gris tenue (`text-zinc-500 text-xs font-medium`).
   - [ ] **Cronómetro** (Inactivo): Texto gris tenue (`text-zinc-500 text-xs font-medium`).
   - [ ] **Temporizador** (Inactivo): Texto gris tenue (`text-zinc-500 text-xs font-medium`).
-- [ ] **Margen inferior para barra de gestos**: Padding inferior extra (`pb-4`) para no chocar con la barra de navegación gestual de Android.
+- [ ] **Margen inferior para barra de gestos**: Padding inferior extra (`pb-4` / `safe-area`) para no chocar con la barra de gestos de Android.
 
 ---
 
-## 5. ⚙️ Lógica de Próxima Alarma
+## 5. ⚙️ Lógica de Próxima Alarma (NextAlarm Logic)
 
-- [ ] Crear función auxiliar `getNextAlarm(alarms: Alarm[])` que determine cuál es la alarma habilitada (`isEnable === true`) más cercana al horario actual para alimentar el texto del Header.
+- [ ] Crear función auxiliar `getNextAlarm(alarms: Alarm[])`:
+  - [ ] Filtrar solo las alarmas activas (`isEnable === true`).
+  - [ ] Si la alarma tiene días de la semana seleccionados, calcular la fecha/hora exacta del próximo día de disparo.
+  - [ ] Si no tiene días seleccionados, calcular para hoy o mañana según la hora actual.
+  - [ ] Ordenar por la fecha más cercana y retornar la próxima alarma.
+- [ ] Pasar `alarms` desde `App.tsx` a `NextAlarm` para alimentar el componente con datos reales.
+- [ ] Manejar estado vacío cuando no haya alarmas activadas (ej: *"Sin alarmas programadas"*).
+
+---
+
+## 6. 🔔 Notificaciones Nativas y Repetición en Android
+
+- [ X ] **Canal de Máxima Prioridad**: Crear `alarm_channel` con `importance: 5` y sonido `musica.mp3`.
+- [ X ] **Permisos de Android**: Configurados en `AndroidManifest.xml` (`WAKE_LOCK`, `USE_EXACT_ALARM`, `POST_NOTIFICATIONS`, etc.).
+- [ X ] **Repetición Semanal**: Diccionario de días (`D=1, L=2...`) y programación con `schedule.on.weekday` y `repeats: true`.
+- [ X ] **Fix de Desbordamiento de 32 bits**: Acotar el `baseId = alarm.id % 100000000` para evitar el error `IDENTIFIER_NOT_INT`.
+- [ X ] **Cancelación Masiva de IDs**: Cancelar tanto el ID base como los IDs de cada día de la semana (`baseId * 10 + day`).
+- [ ] **Verificación en Celular Real**: Confirmar que la alarma suene en la hora programada con pantalla bloqueada.
+
+---
+
+## 7. 🪄 Polish, Sonidos y Ajustes Finales
+
+- [ ] **Gestión de Audios**: Definir si se reemplaza `musica.mp3` por el nuevo audio de Cloudflare R2 y cómo se utilizará el archivo de subtítulos `.vtt`.
+- [ ] **Feedback Háptico / Vibración**: Integrar vibración táctil sutil al alternar el Switch o interactuar con los botones.
