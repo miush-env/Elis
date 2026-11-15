@@ -14,8 +14,8 @@ Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista d
 
 ## 2. 🔝 Cabecera Superior (Header / NextAlarm)
 
-- [ ] **Título dinámico principal**: Conectar el texto grande: `Alarma programada a las [HH:MM]` obtenido en tiempo real de la alarma activa más próxima (o mensaje cuando no hay alarmas activas).
-- [ ] **Subtítulo temporal dinámico**: Fecha y hora de la próxima alarma activa (ej: `mar, 3 nov 06:20`) calculada en base al día correspondiente.
+- [ - ] **Título dinámico principal**: Conectar el texto grande: `Alarma programada a las [HH:MM]` obtenido en tiempo real de la alarma activa más próxima (o mensaje cuando no hay alarmas activas).
+- [ - ] **Subtítulo temporal dinámico**: Fecha y hora de la próxima alarma activa (ej: `mar, 3 nov 06:20`) calculada en base al día correspondiente.
 - [ X ] **Botón de crear alarma**: Botón con icono `+` (`Plus` de Lucide) que abre el modal/drawer para crear una nueva alarma.
 - [ ] **Botón de menú de ajustes**: Conectar el botón con icono `⋮` (`EllipsisVertical` de Lucide) con menú/popover de opciones.
 
@@ -52,8 +52,8 @@ Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista d
 
 ## 5. ⚙️ Lógica de Próxima Alarma (NextAlarm Logic)
 
-- [ ] Crear función auxiliar `getNextAlarm(alarms: Alarm[])`:
-  - [ ] Filtrar solo las alarmas activas (`isEnable === true`).
+- [ - ] Crear función auxiliar `getNextAlarm(alarms: Alarm[])`:
+  - [ - ] Filtrar solo las alarmas activas (`isEnable === true`).
   - [ ] Si la alarma tiene días de la semana seleccionados, calcular la fecha/hora exacta del próximo día de disparo.
   - [ ] Si no tiene días seleccionados, calcular para hoy o mañana según la hora actual.
   - [ ] Ordenar por la fecha más cercana y retornar la próxima alarma.
