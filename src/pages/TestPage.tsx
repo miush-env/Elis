@@ -1,4 +1,5 @@
 import { NavLink } from "react-router";
+import NavBar from "@/components/NavBar";
 
 function TestPage() {
   return (
@@ -7,6 +8,8 @@ function TestPage() {
       <button className="bg-blue-500 py-2 px-5">
         <NavLink to="/">Inicio</NavLink>
       </button>
+
+      <NavBar />
     </div>
   )
 }
