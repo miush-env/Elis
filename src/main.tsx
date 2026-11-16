@@ -10,7 +10,9 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="/create" element={<TestPage />} />
+      <Route path="/world-clock" element={<TestPage />} />
+      <Route path="/stopwach" element={<TestPage />} />
+      <Route path="/timer" element={<TestPage />} />
     </Routes>
   </BrowserRouter>,
   </StrictMode>,
