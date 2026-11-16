@@ -9,6 +9,7 @@ import { getAlarms } from "@/services/storage/alarmStorage";
 import type { Alarm } from "@/types/alarm";
 import { Button } from "@components/ui/button";
 import { Plus, EllipsisVertical } from "lucide-react";
+import NavBar from "@components/NavBar";
 
 function App() {
   // const [alarmTime] = useState<string>("07:30");
@@ -95,6 +96,8 @@ function App() {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
+
+      <NavBar />
     </main>
   );
 }
