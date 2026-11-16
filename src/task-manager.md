@@ -40,13 +40,13 @@ Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista d
 
 ## 4. 🧭 Barra de Navegación Inferior (Bottom Navigation Bar)
 
-- [ ] **Contenedor fijo**: Fijado en la parte inferior (`fixed bottom-0 left-0 w-full bg-black/95 backdrop-blur-md border-t border-zinc-900`).
-- [ ] **Items de navegación**:
-  - [ ] **Alarma** (Pestaña activa): Texto blanco con barra horizontal/píldora blanca indicadora debajo.
-  - [ ] **Reloj Mundial** (Inactivo): Texto gris tenue (`text-zinc-500 text-xs font-medium`).
-  - [ ] **Cronómetro** (Inactivo): Texto gris tenue (`text-zinc-500 text-xs font-medium`).
-  - [ ] **Temporizador** (Inactivo): Texto gris tenue (`text-zinc-500 text-xs font-medium`).
-- [ ] **Margen inferior para barra de gestos**: Padding inferior extra (`pb-4` / `safe-area`) para no chocar con la barra de gestos de Android.
+- [ X ] **Contenedor fijo**: Fijado en la parte inferior (`fixed bottom-0 left-0 w-full bg-black/95 backdrop-blur-md border-t border-zinc-900`).
+- [ X ] **Items de navegación**:
+  - [ - ] **Alarma** (Pestaña activa): Texto blanco con barra horizontal/píldora blanca indicadora debajo.
+  - [ - ] **Reloj Mundial** (Inactivo): Texto gris tenue (`text-zinc-500 text-xs font-medium`).
+  - [ - ] **Cronómetro** (Inactivo): Texto gris tenue (`text-zinc-500 text-xs font-medium`).
+  - [ - ] **Temporizador** (Inactivo): Texto gris tenue (`text-zinc-500 text-xs font-medium`).
+- [ X ] **Margen inferior para barra de gestos**: Padding inferior extra (`pb-4` / `safe-area`) para no chocar con la barra de gestos de Android.
 
 ---
 
