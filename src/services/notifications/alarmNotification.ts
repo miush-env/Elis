@@ -2,6 +2,8 @@ import { BackgroundMode } from "@anuradev/capacitor-background-mode";
 import { LocalNotifications } from "@capacitor/local-notifications";
 import type { Alarm } from "@/types/alarm";
 
+export const ALARM_CHANNEL_ID = "alarm_channel_v2";
+
 export const setupNotifications = async () => {
   try {
     await BackgroundMode.requestNotificationsPermission();
@@ -18,13 +20,20 @@ export const setupNotifications = async () => {
       await LocalNotifications.requestPermissions();
     }
 
+    // Limpiar canal previo para asegurar que Android aplique los nuevos parámetros (sonido e importancia 5)
+    try {
+      await LocalNotifications.deleteChannel({ id: "alarm_channel" });
+    } catch (_) {
+      // Ignorar si no existía
+    }
+
     // 1. Crear canal de máxima prioridad para despertar la pantalla
     await LocalNotifications.createChannel({
-      id: "alarm_channel",
+      id: ALARM_CHANNEL_ID,
       name: "Alarmas Aura",
       description:
         "Canal de alta prioridad para despertar el dispositivo con alarmas",
-      importance: 5, // 5 = IMPORTANCE_HIGH (enciende la pantalla y muestra alerta)
+      importance: 5, // 5 = IMPORTANCE_HIGH (enciende la pantalla y muestra alerta flotante Heads-Up)
       visibility: 1, // 1 = VISIBILITY_PUBLIC (visible en pantalla de bloqueo)
       sound: "musica.mp3",
       vibration: true,
@@ -82,17 +91,19 @@ export const scheduleAlarmNotification = async (alarm: Alarm) => {
         title: alarm.name || "¡Alarma Sonando!",
         body: "Elige una acción para apagarla:",
         schedule: {
-          at: targetDate, // 👈 at va directo sin llaves { targetDate }
+          at: targetDate,
           allowWhileIdle: true,
         },
         actionTypeId: "ALARM_ACTIONS",
-        channelId: "alarm_channel",
+        channelId: ALARM_CHANNEL_ID,
         sound: "musica.mp3",
+        ongoing: true,
+        autoCancel: false,
+        foreground: true,
       },
     ];
   } else {
     const baseId = alarm.id % 100000000;
-    // const notificationId = baseId * 10 + dayNumber;
     notificationsToSchedule = weekDay.map((dayNumber) => ({
       id: baseId * 10 + dayNumber,
       title: alarm.name || "¡Alarma Sonando!",
@@ -103,12 +114,15 @@ export const scheduleAlarmNotification = async (alarm: Alarm) => {
           hour: alarm.time.hour,
           minute: alarm.time.minute,
         },
-        repeats: true, // 👈 ¡No te olvides de este para que repita!
-        allowWhileIdle: true, // 👈 Para que suene con la pantalla apagada
+        repeats: true,
+        allowWhileIdle: true,
       },
       actionTypeId: "ALARM_ACTIONS",
-      channelId: "alarm_channel",
+      channelId: ALARM_CHANNEL_ID,
       sound: "musica.mp3",
+      ongoing: true,
+      autoCancel: false,
+      foreground: true,
     }));
   }
 

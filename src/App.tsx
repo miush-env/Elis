@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { LocalNotifications } from "@capacitor/local-notifications";
 import { startMusic, stopMusic } from "./services/sound/playerSound";
-import { setupNotifications } from "./services/notifications/alarmNotification";
+import {
+  setupNotifications,
+  ALARM_CHANNEL_ID,
+} from "./services/notifications/alarmNotification";
 import NextAlarm from "@components/NextAlarm";
 import ListAlarm from "@components/ListAlarm";
 import CreateAlarm from "@components/CreateAlarm";
@@ -53,8 +56,16 @@ function App() {
                 id: Number(action.notification.id) || 1,
                 title: "¡Alarma Aplazada!",
                 body: "Toca Apagar o Aplazar para detener el sonido.",
-                schedule: { at: snoozeDate },
+                schedule: {
+                  at: snoozeDate,
+                  allowWhileIdle: true,
+                },
                 actionTypeId: "ALARM_ACTIONS",
+                channelId: ALARM_CHANNEL_ID,
+                sound: "musica.mp3",
+                ongoing: true,
+                autoCancel: false,
+                foreground: true,
               },
             ],
           });

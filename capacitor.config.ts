@@ -9,5 +9,5 @@ const config: CapacitorConfig = {
       cleartext: true, // Necesario en Android para permitir conexiones HTTP no encriptadas
     },
 };
-
+  
 export default config;

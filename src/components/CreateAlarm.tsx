@@ -61,18 +61,21 @@ function CreateAlarm({
     await scheduleAlarmNotification(newAlarm);
 
     onAlarmCreated();
+    setIsOpen(false);
+    setTimeAlarm("");
+    setAlarmName("");
   };
 
   const isFormValid = timeAlarm.trim() !== "" && alarmName.trim() !== "";
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent>
+      <DialogContent className="bg-[#18181A] border border-zinc-800 text-white rounded-[24px]">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
-            <DialogTitle>Nueva Alarma</DialogTitle>
-            <DialogDescription>
-              configura la hora de tu alarma
+            <DialogTitle className="text-white text-lg font-semibold">Nueva Alarma</DialogTitle>
+            <DialogDescription className="text-zinc-400 text-xs">
+              Configura la hora y días de tu alarma
             </DialogDescription>
           </DialogHeader>
           <div className="flex flex-col gap-4 mt-4">
@@ -81,6 +84,7 @@ function CreateAlarm({
               name="timeAlarm"
               id="timeAlarm"
               required
+              className="bg-[#242428] border-zinc-700 text-white placeholder:text-zinc-500 rounded-xl h-11"
               value={timeAlarm}
               onChange={(e) => setTimeAlarm(e.target.value)}
             />
@@ -90,6 +94,7 @@ function CreateAlarm({
               id="alarmName"
               required
               placeholder="Nombre de la alarma"
+              className="bg-[#242428] border-zinc-700 text-white placeholder:text-zinc-500 rounded-xl h-11"
               value={alarmName}
               onChange={(e) => setAlarmName(e.target.value)}
             />
