@@ -7,14 +7,29 @@ function NavBar() {
     }`;
 
   return (
-   <nav className="fixed bottom-0 left-0 w-full bg-black/95 backdrop-blur-md border-t border-zinc-900 pb-6 pt-3 flex overflow-x-auto gap-5 px-6 no-scrollbar">
+    <nav className="fixed bottom-0 left-0 w-full bg-black/95 backdrop-blur-md border-t border-zinc-900 pb-6 pt-3 flex overflow-x-auto gap-5 px-6 no-scrollbar">
       <NavLink to="/" className={linkClass}>
         {({ isActive }) => (
           <>
             <span>Alarma</span>
             {isActive ? (
               <span className="w-5 h-0.5 bg-white rounded-full mt-1" />
-            ) : (<span className="w-5 h-0.5 bg-transparent rounded-full mt-1" />)}
+            ) : (
+              <span className="w-5 h-0.5 bg-transparent rounded-full mt-1" />
+            )}
+          </>
+        )}
+      </NavLink>
+
+      <NavLink to="/climate" className={linkClass}>
+        {({ isActive }) => (
+          <>
+            <span>Clima</span>
+            {isActive ? (
+              <span className="w-5 h-0.5 bg-white rounded-full mt-1" />
+            ) : (
+              <span className="w-5 h-0.5 bg-transparent rounded-full mt-1" />
+            )}
           </>
         )}
       </NavLink>
@@ -25,7 +40,9 @@ function NavBar() {
             <span>Reloj Mundial</span>
             {isActive ? (
               <span className="w-5 h-0.5 bg-white rounded-full mt-1" />
-            ) : (<span className="w-5 h-0.5 bg-transparent rounded-full mt-1" />)}
+            ) : (
+              <span className="w-5 h-0.5 bg-transparent rounded-full mt-1" />
+            )}
           </>
         )}
       </NavLink>
@@ -36,7 +53,9 @@ function NavBar() {
             <span>Cronómetro</span>
             {isActive ? (
               <span className="w-5 h-0.5 bg-white rounded-full mt-1" />
-            ) : (<span className="w-5 h-0.5 bg-transparent rounded-full mt-1" />)}
+            ) : (
+              <span className="w-5 h-0.5 bg-transparent rounded-full mt-1" />
+            )}
           </>
         )}
       </NavLink>
@@ -47,7 +66,9 @@ function NavBar() {
             <span>Temporizador</span>
             {isActive ? (
               <span className="w-5 h-0.5 bg-white rounded-full mt-1" />
-            ) : (<span className="w-5 h-0.5 bg-transparent rounded-full mt-1" />)}
+            ) : (
+              <span className="w-5 h-0.5 bg-transparent rounded-full mt-1" />
+            )}
           </>
         )}
       </NavLink>
