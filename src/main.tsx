@@ -4,7 +4,6 @@ import { BrowserRouter,  Routes, Route } from "react-router";
 import './index.css'
 import App from './App.tsx'
 import TestPage from './pages/TestPage.tsx';
-import WorldClock from './pages/WorldClock.tsx';
 import Climate from './pages/Climate.tsx';
 
 createRoot(document.getElementById('root')!).render(
@@ -12,7 +11,6 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="/world-clock" element={<WorldClock />} />
       <Route path="/climate" element={<Climate />} />
       <Route path="/stopwach" element={<TestPage />} />
       <Route path="/timer" element={<TestPage />} />
