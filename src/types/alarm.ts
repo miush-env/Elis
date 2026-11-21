@@ -9,10 +9,3 @@ export interface Alarm {
   days: string[];
   isEnable: boolean;
 }
-
-export interface WorldCity {
-  id: string;
-  name: string;      
-  country: string;   
-  timeZone: string;  
-}

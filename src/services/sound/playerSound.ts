@@ -1,34 +1,40 @@
-import { BackgroundMode } from "@anuradev/capacitor-background-mode";
+import { registerPlugin } from "@capacitor/core";
 
-const music = new Audio("/musica.mp3");
-music.loop = true;
+const AlarmSound = registerPlugin<{
+  start: () => Promise<void>;
+  stop: () => Promise<void>;
+}>("AlarmSound");
+
+// Fallback web (para pruebas en navegador de PC)
+let webAudio: HTMLAudioElement | null = null;
 
 export const startMusic = async () => {
   try {
-    await BackgroundMode.enable({
-      title: "¡Alarma Sonando!",
-      text: "La alarma continuará sonando hasta que presiones Apagar o Aplazar.",
-      hidden: false,
-      silent: true,
-    });
+    await AlarmSound.start();
   } catch (e) {
-    console.warn("Error al activar BackgroundMode:", e);
-  }
-
-  try {
-    music.currentTime = 0;
-    await music.play();
-  } catch (e) {
-    console.error("Error al reproducir audio:", e);
+    console.warn("AlarmSound nativo no disponible (ejecutando en web?):", e);
+    try {
+      if (!webAudio) {
+        webAudio = new Audio("/musica.mp3");
+        webAudio.loop = true;
+      }
+      webAudio.currentTime = 0;
+      await webAudio.play();
+    } catch (err) {
+      console.error("Error al reproducir audio web:", err);
+    }
   }
 };
 
 export const stopMusic = async () => {
   try {
-    music.pause();
-    music.currentTime = 0;
-    await BackgroundMode.disable();
+    await AlarmSound.stop();
   } catch (e) {
-    console.warn("Error al desactivar BackgroundMode:", e);
+    console.warn("Error al detener AlarmSound nativo:", e);
+  }
+
+  if (webAudio) {
+    webAudio.pause();
+    webAudio.currentTime = 0;
   }
 };

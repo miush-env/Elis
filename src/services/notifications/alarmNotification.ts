@@ -2,7 +2,7 @@ import { BackgroundMode } from "@anuradev/capacitor-background-mode";
 import { LocalNotifications } from "@capacitor/local-notifications";
 import type { Alarm } from "@/types/alarm";
 
-export const ALARM_CHANNEL_ID = "alarm_channel_v2";
+export const ALARM_CHANNEL_ID = "alarm_channel_v4";
 
 export const setupNotifications = async () => {
   try {
@@ -20,13 +20,6 @@ export const setupNotifications = async () => {
       await LocalNotifications.requestPermissions();
     }
 
-    // Limpiar canal previo para asegurar que Android aplique los nuevos parámetros (sonido e importancia 5)
-    try {
-      await LocalNotifications.deleteChannel({ id: "alarm_channel" });
-    } catch (_) {
-      // Ignorar si no existía
-    }
-
     // 1. Crear canal de máxima prioridad para despertar la pantalla
     await LocalNotifications.createChannel({
       id: ALARM_CHANNEL_ID,
@@ -35,7 +28,6 @@ export const setupNotifications = async () => {
         "Canal de alta prioridad para despertar el dispositivo con alarmas",
       importance: 5, // 5 = IMPORTANCE_HIGH (enciende la pantalla y muestra alerta flotante Heads-Up)
       visibility: 1, // 1 = VISIBILITY_PUBLIC (visible en pantalla de bloqueo)
-      sound: "musica.mp3",
       vibration: true,
     });
 
@@ -96,7 +88,6 @@ export const scheduleAlarmNotification = async (alarm: Alarm) => {
         },
         actionTypeId: "ALARM_ACTIONS",
         channelId: ALARM_CHANNEL_ID,
-        sound: "musica.mp3",
         ongoing: true,
         autoCancel: false,
         foreground: true,
@@ -119,7 +110,6 @@ export const scheduleAlarmNotification = async (alarm: Alarm) => {
       },
       actionTypeId: "ALARM_ACTIONS",
       channelId: ALARM_CHANNEL_ID,
-      sound: "musica.mp3",
       ongoing: true,
       autoCancel: false,
       foreground: true,
