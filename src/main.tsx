@@ -3,9 +3,9 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from "react-router";
 import './index.css'
 import App from './App.tsx'
-import TestPage from './pages/TestPage.tsx';
 import Climate from './pages/Climate.tsx';
 import Timer from './pages/Timer.tsx';
+import Stopwatch from './pages/Stopwatch.tsx';
 import { AlarmGlobalListener } from './components/AlarmGlobalListener.tsx';
 
 createRoot(document.getElementById('root')!).render(
@@ -16,8 +16,7 @@ createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/climate" element={<Climate />} />
-        <Route path="/stopwatch" element={<TestPage />} />
-        <Route path="/stopwach" element={<TestPage />} />
+        <Route path="/stopwatch" element={<Stopwatch />} />
         <Route path="/timer" element={<Timer />} />
       </Routes>
     </BrowserRouter>
