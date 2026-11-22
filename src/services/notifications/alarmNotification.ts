@@ -23,7 +23,7 @@ export const setupNotifications = async () => {
     // 1. Crear canal de máxima prioridad para despertar la pantalla
     await LocalNotifications.createChannel({
       id: ALARM_CHANNEL_ID,
-      name: "Alarmas Aura",
+      name: "Alarmas Elis",
       description:
         "Canal de alta prioridad para despertar el dispositivo con alarmas",
       importance: 5, // 5 = IMPORTANCE_HIGH (enciende la pantalla y muestra alerta flotante Heads-Up)

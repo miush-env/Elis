@@ -55,7 +55,7 @@ interface SearchCityResult {
 
 const API_KEY =
   import.meta.env.VITE_WEATHER_API_KEY || "2e303588aa8740bdb78230803262011";
-const STORAGE_KEY = "aura_saved_weather_city";
+const STORAGE_KEY = "elis_saved_weather_city";
 
 const formatDayName = (dateStr: string, index: number) => {
   if (index === 0) return "Hoy";

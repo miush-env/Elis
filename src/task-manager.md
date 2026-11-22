@@ -1,4 +1,4 @@
-# Task Manager - Proyecto Aura (Alarma, Clima, Temporizador y Cronómetro)
+# Task Manager - Proyecto Elis (Alarma, Clima, Temporizador y Cronómetro)
 
 Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista AMOLED de la app y asegurar el funcionamiento nativo en Android.
 
@@ -17,7 +17,7 @@ Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista A
 - [ X ] **Título dinámico principal**: Conectar el texto grande: `Alarma programada a las [HH:MM]` obtenido en tiempo real de la alarma activa más próxima (o mensaje cuando no hay alarmas activas).
 - [ X ] **Subtítulo temporal dinámico**: Fecha y hora de la próxima alarma activa (ej: `mar, 3 nov 06:20`) calculada en base al día correspondiente.
 - [ X ] **Botón de crear alarma**: Botón con icono `+` (`Plus` de Lucide) que abre el modal/drawer para crear una nueva alarma.
-- [ ] **Botón de menú de opciones**: Conectar el botón con icono `⋮` (`EllipsisVertical` de Lucide) con menú/popover de opciones (Configuración, Acerca de Aura).
+- [ ] **Botón de menú de opciones**: Conectar el botón con icono `⋮` (`EllipsisVertical` de Lucide) con menú/popover de opciones (Configuración, Acerca de Elis).
 
 ---
 

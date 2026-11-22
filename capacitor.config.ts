@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.ejemplo.myapp',
-  appName: 'Mi App',
+  appName: 'Elis',
   webDir: 'dist',
   server: {
       url: 'http://192.168.1.44:5173', // Reemplaza por tu IP del paso 1

@@ -8,7 +8,7 @@ import { ALARM_CHANNEL_ID } from "@/services/notifications/alarmNotification";
 type TimerMode = "IDLE" | "RUNNING" | "PAUSED" | "FINISHED";
 
 const TIMER_NOTIFICATION_ID = 999999;
-const STORAGE_KEY = "aura_timer_state_v1";
+const STORAGE_KEY = "elis_timer_state_v1";
 
 interface SavedTimerState {
   mode: TimerMode;

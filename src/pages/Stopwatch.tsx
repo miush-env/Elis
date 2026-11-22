@@ -19,7 +19,7 @@ export interface Lap {
   overallTime: number;
 }
 
-const STORAGE_KEY = "aura_stopwatch_state_v1";
+const STORAGE_KEY = "elis_stopwatch_state_v1";
 
 interface SavedStopwatchState {
   isRunning: boolean;
