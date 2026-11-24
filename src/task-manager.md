@@ -35,6 +35,8 @@ Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista A
   - [ X ] Sincronización con base de datos local (`toggleAlarmStatus`).
   - [ X ] Programar/cancelar notificación al alternar el switch.
 - [ X ] **Eliminación de Alarma**: Popover contextual para borrar la alarma del storage y cancelar sus notificaciones.
+- [ X ] **Ordenamiento Cronológico Automático**: Las tarjetas se ordenan automáticamente de la más temprana a la más tardía calculando `(hora * 60 + minuto)`.
+- [ X ] **Efecto de Desvanecimiento Vertical (Mask Fade)**: Degradado sutil en el eje Y con `mask-image` sobre el contenedor `ScrollArea` para suavizar los extremos de la lista al deslizar.
 
 ---
 
@@ -118,4 +120,4 @@ Objetivo: Replicar con fidelidad pixel-perfect el diseño oscuro y minimalista A
 - [ ] **Menú de Opciones en Cabecera (`⋮`)**: Menú desplegable con información de la app, ajustes o licencia.
 - [ ] **Gestión de Tonos / Audios Personalizados**: Selector de tonos o sincronización de audio con subtítulos `.vtt`.
 - [ ] **Feedback Háptico / Vibración sutil**: Vibración táctil háptica al interactuar con botones y switches (`@capacitor/haptics`).
-- [ ] **Commit y Push de Cronómetro**: Subir a GitHub los cambios de `Stopwatch.tsx` y `main.tsx`.
+- [ X ] **Commit y Push a GitHub**: Subidos los cambios de Cronómetro, Temporizador, desvanecimiento y ordenamiento.
